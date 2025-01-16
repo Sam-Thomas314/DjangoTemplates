@@ -10,6 +10,21 @@
 <h2>Popular courses list</h2>
 
 <!-- Add your template there -->
+{% if course_list %}
+    <ul>
+    {% for course in course_list %}
+        <div>
+            <img src="{{ MEDIA_URL }}/{{ course.image }}" width="360" height="360" >
+            <h1><b>{{ course.name }}</b></h1>
+            <p>Total Enrollment: {{course.total_enrollment}}</p>
+            <p> Course Description: {{course.Description}} </p>        
+
+            </div>
+    {% endfor %}
+    </ul>
+{% else %}
+<p>No courses are available.</p>
+{% endif %}
 
 </body>
 </html>
