@@ -6,7 +6,10 @@ from . import views
 app_name = 'onlinecourse'
 urlpatterns = [
     # Add path here
-    path(route='', view=views.popular_course_list, name = 'popular_course_list')
+    path(route='', view=views.popular_course_list, name = 'popular_course_list'),
+    path('course/<int:course_id>/enroll/', views.enroll, name = 'enroll')
+    #redirect user to the same page
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

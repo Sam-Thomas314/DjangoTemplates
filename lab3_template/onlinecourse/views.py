@@ -16,4 +16,12 @@ def popular_course_list(request):
 
         context['course_list'] = course_list
         return render(request, 'onlinecourse/course_list.html', context)
+def enroll(request, course_id):
+    if request.method == "POST":
+        course = get_object_or_404(Course, pk=course_id)
+        #Try to read the cour object
+        #if not found raise the 404 exception
+        course.total_enrollment +=1
+        course.save()
+        return HttpResponseRedirect(reverse(viewname = 'onlinecourse:popular_course_list'))
 
