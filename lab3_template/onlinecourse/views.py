@@ -23,5 +23,14 @@ def enroll(request, course_id):
         #if not found raise the 404 exception
         course.total_enrollment +=1
         course.save()
-        return HttpResponseRedirect(reverse(viewname = 'onlinecourse:popular_course_list'))
+        return HttpResponseRedirect(reverse(viewname = 'onlinecourse:course_detail', args = (course_id,)))
 
+def course_details(request, course_id):
+    context = {}
+    if request.method == "GET":
+        try:
+            course = Course.objects.get(pk = course_id )
+            context['course'] = course
+            return render(request, 'onlinecourse/course_detail.html', context)
+        except Course.DoesNotExist:
+            raise Http404("No course mathes the given id")
